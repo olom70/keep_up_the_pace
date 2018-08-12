@@ -7,7 +7,7 @@ class Compendium extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('Main'),
+        title: Text('Compendium'),
       ),
       body: Text('Compendium'),
     );

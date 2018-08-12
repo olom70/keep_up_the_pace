@@ -50,34 +50,6 @@ class MainBodyElementsState extends State<MainBodyElements> {
         whereTo: _mainPanels.Compendium),
   ];
 
-  whereTo(_mainPanels whichPanel) {
-    switch (whichPanel.toString()) {
-      case 'Metrics':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Metrics()),
-        );
-        break;
-      case 'Profile':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Profile()),
-        );
-        break;
-      case 'Compendium':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Compendium()),
-        );
-        break;
-      default:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Metrics()),
-        );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return new ListView(children: [
@@ -107,21 +79,21 @@ class MainBodyElementsState extends State<MainBodyElements> {
                   RaisedButton(
                       onPressed: () {
                         switch (item.whereTo.toString()) {
-                          case 'Metrics':
+                          case '_mainPanels.Metrics':
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Metrics()),
                             );
                             break;
-                          case 'Profile':
+                          case '_mainPanels.Profile':
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Profile()),
                             );
                             break;
-                          case 'Compendium':
+                          case '_mainPanels.Compendium':
                             Navigator.push(
                               context,
                               MaterialPageRoute(
