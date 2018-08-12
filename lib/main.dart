@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:keep_up_the_pace/homepage.dart';
 import 'package:flutter/rendering.dart';
+import 'package:keep_up_the_pace/KeepUpThePace.dart' as keepupthepace;
 
 void main() {
-  debugPaintSizeEnabled=false;
+  debugPaintSizeEnabled=false; // debug layout
+
+  keepupthepace.Profile profile = new keepupthepace.Profile('test')
+    ..weight = 67.0
+    ..heightIntegerPart = 1
+    ..heightDecimalPart = 72
+    ..metricChoice = 'iso'
+    ..age = 48
+    ..gender = 'M';
+
+
   runApp(new MyApp());
 }
 
@@ -14,10 +25,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'KeepUpThePace',
-      theme: new ThemeData(
+      theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }
