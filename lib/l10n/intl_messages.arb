@@ -1,0 +1,9 @@
+{
+  "@@last_modified": "2018-08-15T19:09:21.018032",
+  "DemoLocalizations_title": "Keep Up The Pace intl",
+  "@DemoLocalizations_title": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  }
+}
