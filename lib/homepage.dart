@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:keep_up_the_pace/metrics.dart';
 import 'package:keep_up_the_pace/profile.dart';
 import 'package:keep_up_the_pace/compendium.dart';
+import 'package:keep_up_the_pace/keepupthepacelocalization.dart';
 
 enum _mainPanels {
   Metrics,
@@ -199,7 +200,7 @@ class MyHomePage extends StatelessWidget {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('Main'),
+        title: Text(DemoLocalizations.of(context).title),
       ),
       drawer: MainDrawer(),
       body: MainBodyElements(),
