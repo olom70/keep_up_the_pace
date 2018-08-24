@@ -4,126 +4,6 @@ import 'package:keep_up_the_pace/profile.dart';
 import 'package:keep_up_the_pace/compendium.dart';
 import 'package:keep_up_the_pace/keepupthepacelocalization.dart';
 
-enum _mainPanels {
-  Metrics,
-  Profile,
-  Compendium
-} // list of all the expansionpanels available on the main screen
-
-class MyItem {
-  MyItem(
-      {this.isExpanded: false,
-      this.header,
-      this.description,
-      this.longDescription,
-      this.whereTo});
-
-  bool isExpanded;
-  final String header;
-  final String description;
-  final String longDescription;
-  final _mainPanels whereTo;
-}
-
-class MainBodyElements extends StatefulWidget {
-  @override
-  MainBodyElementsState createState() => new MainBodyElementsState();
-}
-
-class MainBodyElementsState extends State<MainBodyElements> {
-  List<MyItem> _items = <MyItem>[
-    MyItem(
-        header: 'Metrics',
-        description: 'Enter facts, know your state',
-        longDescription:
-            'Set up the current profile with gender, age, weight, size, etc. Visualize several metrics relative to you.',
-        whereTo: _mainPanels.Metrics),
-    MyItem(
-        header: 'Profile',
-        description: 'Manage profiles',
-        longDescription: 'Rename, copy, change goal, etc.',
-        whereTo: _mainPanels.Profile),
-    MyItem(
-        header: 'Compendium',
-        description: 'Compendium of physical activities',
-        longDescription:
-            'Explore thousands of activities and their energy consumption',
-        whereTo: _mainPanels.Compendium),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return new ListView(children: [
-      ExpansionPanelList(
-        expansionCallback: (int index, bool isExpanded) {
-          setState(() {
-            _items[index].isExpanded = !_items[index].isExpanded;
-          });
-        },
-        children: _items.map((MyItem item) {
-          return ExpansionPanel(
-            headerBuilder: (BuildContext context, bool isExpanded) {
-              return Container(
-                child: Row(
-                  children: <Widget>[
-                    Text(item.header),
-                    Text(item.description),
-                  ],
-                ),
-              );
-            },
-            isExpanded: item.isExpanded,
-            body: Container(
-              child: Column(
-                children: <Widget>[
-                  Text(item.longDescription),
-                  RaisedButton(
-                      onPressed: () {
-                        switch (item.whereTo.toString()) {
-                          case '_mainPanels.Metrics':
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Metrics()),
-                            );
-                            break;
-                          case '_mainPanels.Profile':
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Profile()),
-                            );
-                            break;
-                          case '_mainPanels.Compendium':
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Compendium()),
-                            );
-                            break;
-                          default:
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Metrics()),
-                            );
-                        }
-                      },
-                      child: const Text('Go !',
-                          style: const TextStyle(
-                              color: Colors.black54,
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w500)))
-                ],
-              ),
-            ),
-          );
-        }).toList(),
-      )
-    ]);
-  }
-}
-
 class MainDrawer extends StatelessWidget {
   MainDrawer({Key key}) : super(key: key);
 
@@ -197,13 +77,87 @@ class MainDrawer extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text(DemoLocalizations.of(context).title),
+        title: Text(DemoLocalizations.of(context).mainTitle),
       ),
       drawer: MainDrawer(),
-      body: MainBodyElements(),
+      body: GridView.count(
+          crossAxisCount: 1,
+          padding: EdgeInsets.all(16.0),
+          childAspectRatio: 4.0 / 1.0,
+        children: <Widget>[
+          Card(
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(DemoLocalizations.of(context).metricsHeader),
+                  SizedBox(height: 8.0,),
+                  Text(DemoLocalizations.of(context).metricsDescription),
+                  SizedBox(height: 8.0,),
+                  Text(DemoLocalizations.of(context).metricsLongDescription),
+                  RaisedButton(onPressed: ()
+                    {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Metrics()),
+                      );
+                    }
+                  )
+                ],
+              ),
+            ),
+          ),
+          Card(
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(DemoLocalizations.of(context).profileHeader),
+                  SizedBox(height: 8.0,),
+                  Text(DemoLocalizations.of(context).profileDescription),
+                  SizedBox(height: 8.0,),
+                  Text(DemoLocalizations.of(context).profileLongDescription),
+                  RaisedButton(onPressed: ()
+                  {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Profile()),
+                    );
+                  }
+                  )
+                ],
+              ),
+            ),
+          ),
+          Card(
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(DemoLocalizations.of(context).compendiumHeader),
+                  SizedBox(height: 8.0,),
+                  Text(DemoLocalizations.of(context).compendiumDescription),
+                  SizedBox(height: 8.0,),
+                  Text(DemoLocalizations.of(context).compendiumLongDescription),
+                  RaisedButton(onPressed: ()
+                  {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Compendium()),
+                    );
+                  }
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

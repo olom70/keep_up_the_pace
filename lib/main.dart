@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
         const Locale('fr', '')
       ],
       title: 'KeepUpThePace',
-      //onGenerateTitle: (BuildContext context) => DemoLocalizations.of(context).title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
