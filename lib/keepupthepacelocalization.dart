@@ -77,7 +77,7 @@ class DemoLocalizations {
 
   String get compendiumHeader {
     return Intl.message(
-      'Metrics',
+      'Conpendium',
       name: 'compendiumHeader',
       desc: 'Compendium',
     );
@@ -98,6 +98,39 @@ class DemoLocalizations {
       desc: 'Long Description of what metrics get access to',
     );
   }
+
+  String get mainButtonLabel {
+    return Intl.message(
+      'GO!',
+      name: 'mainButtonLabel',
+      desc: 'The text onto the button',
+    );
+  }
+
+  String get bmiLabel {
+    return Intl.message(
+      'BMI',
+      name: 'bmiLabel',
+      desc: 'BMI : Body Mass Index',
+    );
+  }
+
+  String get rmrLabel {
+    return Intl.message(
+      'RMR',
+      name: 'rmrLabel',
+      desc: 'RMR : Resting Metabolic Rate',
+    );
+  }
+
+  String get tteLabel {
+    return Intl.message(
+      'TEE',
+      name: 'teeLabel',
+      desc: 'TEE : Total Energy Expenditure',
+    );
+  }
+
 
 }
 

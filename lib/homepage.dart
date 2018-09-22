@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:keep_up_the_pace/metrics.dart';
 import 'package:keep_up_the_pace/profile.dart';
 import 'package:keep_up_the_pace/compendium.dart';
+import 'package:keep_up_the_pace/KeepUpThePace.dart' as keepupthepace;
 import 'package:keep_up_the_pace/keepupthepacelocalization.dart';
 
 class MainDrawer extends StatelessWidget {
@@ -75,6 +76,9 @@ class MainDrawer extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  keepupthepace.Profile profile;
+  MyHomePage({Key key, @required this.profile}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,9 +106,10 @@ class MyHomePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Metrics()),
+                            builder: (context) => Metrics(profile: profile,)),
                       );
-                    }
+                    },
+                    child: Text(DemoLocalizations.of(context).mainButtonLabel),
                   )
                 ],
               ),
@@ -127,7 +132,8 @@ class MyHomePage extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => Profile()),
                     );
-                  }
+                  },
+                    child: Text(DemoLocalizations.of(context).mainButtonLabel),
                   )
                 ],
               ),
@@ -150,7 +156,8 @@ class MyHomePage extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => Compendium()),
                     );
-                  }
+                  },
+                    child: Text(DemoLocalizations.of(context).mainButtonLabel),
                   )
                 ],
               ),

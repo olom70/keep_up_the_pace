@@ -4,6 +4,9 @@ import 'phrasebook.dart' as phrasebook;
 //
 // Exception handling
 //
+enum ActivityFactor {sedentary, lightlyActive, moderatelyActive, veryActive, extraActive}
+enum RmrDates {a1918, a1984, a1990}
+
 class ProfileNotEnoughArguments implements Exception {
   String rootCause;
   ProfileNotEnoughArguments (this.rootCause);
@@ -37,7 +40,7 @@ class Profile {
   double waist;
   double hips;
   String gender;
-  String activityFactor;
+  ActivityFactor activityFactor;
   // infered
   double bBMI; // classic way to calculate it
   double nBMI; // new way to calculate it
@@ -94,7 +97,7 @@ class Profile {
     return rRMRml;
   }
 
-  computeRMR(int version) {
+  computeRMR(RmrDates version) {
     // RMR =  resting metabolic rate
     // https://sites.google.com/site/compendiumofphysicalactivities/corrected-mets
     // https://en.wikipedia.org/wiki/Harris–Benedict_equation
@@ -107,15 +110,15 @@ class Profile {
               switch(gender) {
                 case 'W':
                   switch(version) {
-                    case 1918:
+                    case RmrDates.a1918:
                       rRMRcal = 655.0955 + (9.5634*(weight*0.453592)) + (1.8496*((heightIntegerPart*12+heightDecimalPart)*0.0508)) - (4.6756*age);
                       rRMRml = computeRMRml(rRMRcal, weight);
                       break;
-                    case 1984:
+                    case RmrDates.a1984:
                       rRMRcal = 447.593 + (9.247*(weight*0.453592)) + (3.098*((heightIntegerPart*12+heightDecimalPart)*0.0508)) - (4.330*age);
                       rRMRml = computeRMRml(rRMRcal, weight);
                       break;
-                    case 1990:
+                    case RmrDates.a1990:
                       rRMRcal = -161 + (10*(weight*0.453592)) + (6.25*((heightIntegerPart*12+heightDecimalPart)*0.0508)) - (5*age);
                       rRMRml = computeRMRml(rRMRcal, weight);
                       break;
@@ -125,15 +128,15 @@ class Profile {
                   break;
                 case 'M':
                 switch(version) {
-                    case 1918:
+                    case RmrDates.a1918:
                       rRMRcal = 66.4730 + (13.7516*(weight*0.453592)) + (5.033*((heightIntegerPart*12+heightDecimalPart)*0.0508)) - (6.7550*age);
                       rRMRml = computeRMRml(rRMRcal, weight);
                       break;
-                    case 1984:
+                    case RmrDates.a1984:
                       rRMRcal = 88.362 + (13.397*(weight*0.453592)) + (4.799*((heightIntegerPart*12+heightDecimalPart)*0.0508)) - (5.677*age);
                       rRMRml = computeRMRml(rRMRcal, weight);
                       break;
-                    case 1990:
+                    case RmrDates.a1990:
                       rRMRcal = 5 + (10*(weight*0.453592)) + (6.25*((heightIntegerPart*12+heightDecimalPart)*0.0508)) - (5*age);
                       rRMRml = computeRMRml(rRMRcal, weight);
                       break;
@@ -149,15 +152,15 @@ class Profile {
             switch(gender) {
               case 'W':
               switch(version) {
-                  case 1918:
+                  case RmrDates.a1918:
                     rRMRcal = 655.0955 + (9.5634*weight) + (1.8496*(heightIntegerPart*100+heightDecimalPart)) - (4.6756*age);
                     rRMRml = computeRMRml(rRMRcal, weight);
                     break;
-                  case 1984:
+                  case RmrDates.a1984:
                     rRMRcal = 447.593 + (9.247*weight) + (3.098*(heightIntegerPart*100+heightDecimalPart)) - (4.330*age);
                     rRMRml = computeRMRml(rRMRcal, weight);
                     break;
-                  case 1990:
+                  case RmrDates.a1990:
                     rRMRcal = -161 + (10*weight) + (6.25*(heightIntegerPart*100+heightDecimalPart)) - (5*age);
                     rRMRml = computeRMRml(rRMRcal, weight);
                     break;
@@ -167,15 +170,15 @@ class Profile {
                 break;
               case 'M':
               switch(version) {
-                  case 1918:
+                  case RmrDates.a1918:
                     rRMRcal = 66.4730 + (13.7516*weight) + (5.0033*(heightIntegerPart*100+heightDecimalPart)) - (6.7550*age);
                     rRMRml = computeRMRml(rRMRcal, weight);
                     break;
-                  case 1984:
+                  case RmrDates.a1984:
                     rRMRcal = 88.362 + (13.397*weight) + (4.799*(heightIntegerPart*100+heightDecimalPart)) - (5.677*age);
                     rRMRml = computeRMRml(rRMRcal, weight);
                     break;
-                  case 1990:
+                  case RmrDates.a1990:
                     rRMRcal = 5 + (10*weight) + (6.25*(heightIntegerPart*100+heightDecimalPart)) - (5*age);
                     rRMRml = computeRMRml(rRMRcal, weight);
                     break;
@@ -211,27 +214,27 @@ class Profile {
     //If you are moderatetely active (moderate exercise/sports 3-5 days/week) : Calorie-Calculation = BMR x 1.55
     //If you are very active (hard exercise/sports 6-7 days a week) : Calorie-Calculation = BMR x 1.725
     //If you are extra active (very hard exercise/sports & physical job or 2x training) : Calorie-Calculation = BMR x 1.9
-    if ((bBMR == null) || (activityFactor == null)) {
-      throw new ProfileNotEnoughArguments('$bBMR $activityFactor');
+    if ((rRMRcal == null) || (activityFactor == null)) {
+      throw new ProfileNotEnoughArguments(rRMRcal.toString() + ':' + activityFactor.toString());
     } else {
       switch(activityFactor) {
-        case 'sedentary':
-          hHBE = bBMR * 1.2;
+        case ActivityFactor.sedentary:
+          hHBE = rRMRcal * 1.2;
           break;
-        case 'lightlyActive':
-          hHBE = bBMR * 1.375;
+        case ActivityFactor.lightlyActive:
+          hHBE = rRMRcal * 1.375;
           break;
-        case 'moderatelyActive':
-          hHBE = bBMR * 1.55;
+        case ActivityFactor.moderatelyActive:
+          hHBE = rRMRcal * 1.55;
           break;
-        case 'veryActive':
-          hHBE = bBMR * 1.725;
+        case ActivityFactor.veryActive:
+          hHBE = rRMRcal * 1.725;
           break;
-        case 'extraActive':
-          hHBE = bBMR * 1.9;
+        case ActivityFactor.extraActive:
+          hHBE = rRMRcal * 1.9;
           break;
         default:
-          throw new ProfileNotAProperValue('activityFactor : $activityFactor');
+          throw new ProfileNotAProperValue('activityFactor : ' + activityFactor.toString());
       }
     }
   }

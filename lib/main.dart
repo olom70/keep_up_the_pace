@@ -5,6 +5,7 @@ import 'package:keep_up_the_pace/KeepUpThePace.dart' as keepupthepace;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:keep_up_the_pace/keepupthepacelocalization.dart';
 
+
 void main() {
   debugPaintSizeEnabled=false; // debug layout
 
@@ -14,14 +15,21 @@ void main() {
     ..heightDecimalPart = 72
     ..metricChoice = 'iso'
     ..age = 48
-    ..gender = 'M';
+    ..gender = 'M'
+    ..activityFactor = keepupthepace.ActivityFactor.lightlyActive
+    ..computeBMI()
+    ..computeRMR(keepupthepace.RmrDates.a1990)
+    ..computeHBE();
 
 
-  runApp(new MyApp());
+
+  runApp(new MyApp(profile: profile));
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  keepupthepace.Profile profile;
+  MyApp({Key key, @required this.profile}) : super(key: key);
   @override
 
   Widget build(BuildContext context) {
@@ -39,7 +47,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: MyHomePage(profile: profile,),
     );
   }
 }
