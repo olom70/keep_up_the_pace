@@ -131,6 +131,31 @@ class DemoLocalizations {
     );
   }
 
+  String get metricsLabel {
+    return Intl.message(
+      'Metrics : Dasboard',
+      name: 'metricsLabel',
+      desc: 'Dashboard with all the metrics',
+    );
+  }
+
+  String get metricsButtonLabel {
+    return Intl.message(
+      'Details / Settings',
+      name: 'metricsButtonLabel',
+      desc: 'Button to go to the screen of a specific metric',
+    );
+  }
+
+
+  String get metrics_tabsLabel {
+    return Intl.message(
+      'Metrics',
+      name: 'metrics_tabsLabel',
+      desc: 'All the metrics in a tabbed view',
+    );
+  }
+
 
 }
 

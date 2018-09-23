@@ -17,7 +17,7 @@ void main() {
   ..age = 35
   ..gender = 'W';
 
-  profile.computeRMR(1984);
+  profile.computeRMR(keepupthepace.RmrDates.a1984);
   test('calculate RMR1984 (Calorie)', () {
     expect(profile.rRMRcal, 1371.327);
   });

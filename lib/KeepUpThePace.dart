@@ -5,4 +5,3 @@
 library KeepUpThePace;
 
 export 'src/keepupthepace/profile.dart';
-// TODO: Export any libraries intended for clients of this package.

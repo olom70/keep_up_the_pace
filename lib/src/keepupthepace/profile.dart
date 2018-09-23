@@ -89,6 +89,18 @@ class Profile {
     }
   }
 
+  String displayBMI() {
+    try {
+      computeBMI();
+      return nBMI.round().toString();
+    }
+    catch(e) {
+      return phrasebook.PhraseBook.notEnoughData();
+    }
+  }
+
+
+
   double computeRMRml(double rRMRcal, double weight) {
     // To convert kilocalories per day obtained from the Harris Benedict equation2 to ml.kg-1.min-1, the following formula is used.
     //     kcal.day-1/1440 = kcal.min-1; kcal.min-1/5 = L.min-1; L.min-1/(weight kg)x1000 = ml.kg-1.min-1
@@ -206,6 +218,16 @@ class Profile {
     return correctedMetValue;
   }
 
+  String displayRMR(RmrDates version) {
+    try {
+      computeRMR(version);
+      return rRMRcal.round().toString();
+    }
+    catch(e) {
+      return phrasebook.PhraseBook.notEnoughData();
+    }
+  }
+
 
   computeHBE() {
     //http://www.bmi-calculator.net/bmr-calculator/harris-benedict-equation/
@@ -236,6 +258,16 @@ class Profile {
         default:
           throw new ProfileNotAProperValue('activityFactor : ' + activityFactor.toString());
       }
+    }
+  }
+
+  String displayHBE() {
+    try {
+      computeHBE();
+      return hHBE.round().toString();
+    }
+    catch(e) {
+      return phrasebook.PhraseBook.notEnoughData();
     }
   }
 

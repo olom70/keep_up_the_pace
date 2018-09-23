@@ -15,4 +15,10 @@ class PhraseBook {
     desc: "not Enough arguments",
     examples: const {'rootCause' : 'age'});
 
+  static notEnoughData() => Intl.message(
+      "Not enough data",
+      name: "notEnoughData",
+      args: [],
+      desc: "not enough data to display the requested information",
+      examples: const {'rootCause' : 'age'});
 }

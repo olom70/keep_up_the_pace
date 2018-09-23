@@ -3,6 +3,7 @@ import 'package:keep_up_the_pace/profile.dart';
 import 'package:keep_up_the_pace/compendium.dart';
 import 'package:keep_up_the_pace/KeepUpThePace.dart' as keepupthepace;
 import 'package:keep_up_the_pace/keepupthepacelocalization.dart';
+import 'package:keep_up_the_pace/metrics_tabs.dart';
 
 
 class Metrics extends StatelessWidget {
@@ -11,10 +12,9 @@ class Metrics extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('Metrics'),
+        title: Text(DemoLocalizations.of(context).metricsLabel),
       ),
       body: GridView.count(
         crossAxisCount: 2,
@@ -29,8 +29,18 @@ class Metrics extends StatelessWidget {
                   style: TextStyle(fontSize: 56.0,),
                 ),
                 Text(
-                  profile.nBMI.round().toString(),
+                  profile.displayBMI(),
                   style: TextStyle(fontSize: 56.0),
+                ),
+                RaisedButton(onPressed: ()
+                {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Metrics_tabs(profile: profile,)),
+                  );
+                },
+                  child: Text(DemoLocalizations.of(context).metricsButtonLabel),
                 )
               ],
             ),
@@ -43,7 +53,7 @@ class Metrics extends StatelessWidget {
                   style: TextStyle(fontSize: 56.0,),
                 ),
                 Text(
-                  profile.rRMRcal.round().toString(),
+                  profile.displayRMR(keepupthepace.RmrDates.a1990),
                   style: TextStyle(fontSize: 56.0),
                 )
               ],
@@ -56,8 +66,8 @@ class Metrics extends StatelessWidget {
                   DemoLocalizations.of(context).tteLabel,
                   style: TextStyle(fontSize: 56.0,),
                 ),
-                Text(
-                  profile.hHBE == null ? 'not enough data' : profile.hHBE.round().toString(),
+                Text(profile.displayHBE()
+                  ,
                   style: TextStyle(fontSize: 56.0),
                 )
               ],

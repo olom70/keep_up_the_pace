@@ -16,10 +16,7 @@ void main() {
     ..metricChoice = 'iso'
     ..age = 48
     ..gender = 'M'
-    ..activityFactor = keepupthepace.ActivityFactor.lightlyActive
-    ..computeBMI()
-    ..computeRMR(keepupthepace.RmrDates.a1990)
-    ..computeHBE();
+    ..activityFactor = keepupthepace.ActivityFactor.lightlyActive;
 
 
 
