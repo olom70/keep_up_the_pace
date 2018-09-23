@@ -6,6 +6,8 @@ import 'phrasebook.dart' as phrasebook;
 //
 enum ActivityFactor {sedentary, lightlyActive, moderatelyActive, veryActive, extraActive}
 enum RmrDates {a1918, a1984, a1990}
+enum MetricChoice {iso, imperial}
+enum Gender {Female, Male}
 
 class ProfileNotEnoughArguments implements Exception {
   String rootCause;
@@ -29,7 +31,7 @@ class Profile {
   String profileName;
   String fileName;
   String profileGoal;
-  String metricChoice;
+  MetricChoice metricChoice;
   String defaultProfile;
   double weight;
   int heightIntegerPart;
@@ -39,7 +41,7 @@ class Profile {
   double forearm;
   double waist;
   double hips;
-  String gender;
+  Gender gender;
   ActivityFactor activityFactor;
   // infered
   double bBMI; // classic way to calculate it
@@ -72,19 +74,19 @@ class Profile {
     // or
     // imperial : BMI = 5734*weight(lb)/height(in)2.5
     if ((weight == null) || (heightIntegerPart == null) || (heightDecimalPart == null) || (metricChoice == null)) {
-      throw new ProfileNotEnoughArguments('$weight $heightIntegerPart $heightDecimalPart $metricChoice');
+      throw new ProfileNotEnoughArguments('$weight $heightIntegerPart $heightDecimalPart ' + metricChoice.toString());
   } else {
       switch(metricChoice) {
-        case 'imperial':
+        case MetricChoice.imperial:
           bBMI = 10000*(weight / pow((heightIntegerPart*12+heightDecimalPart),2))*703;
           nBMI = 5734*weight / pow(heightIntegerPart*12+heightDecimalPart,2.5);
           break;
-        case 'iso':
+        case MetricChoice.iso:
           bBMI = 10000*(weight / pow((heightIntegerPart*100+heightDecimalPart),2));
           nBMI = 100000*(weight*1.3 / pow((heightIntegerPart*100+heightDecimalPart),2.5));
           break;
         default:
-          throw new ProfileNotAProperValue('metricChoice : $metricChoice');
+          throw new ProfileNotAProperValue('metricChoice : ' + metricChoice.toString());
       }
     }
   }
@@ -118,9 +120,9 @@ class Profile {
           throw new ProfileNotEnoughArguments('$weight $heightIntegerPart $heightDecimalPart $metricChoice $age $gender');
         } else {
           switch(metricChoice) {
-            case 'imperial':
+            case MetricChoice.imperial:
               switch(gender) {
-                case 'W':
+                case Gender.Female:
                   switch(version) {
                     case RmrDates.a1918:
                       rRMRcal = 655.0955 + (9.5634*(weight*0.453592)) + (1.8496*((heightIntegerPart*12+heightDecimalPart)*0.0508)) - (4.6756*age);
@@ -138,7 +140,7 @@ class Profile {
                       throw new ProfileNotAProperValue('version : $version');
                   }
                   break;
-                case 'M':
+                case Gender.Male:
                 switch(version) {
                     case RmrDates.a1918:
                       rRMRcal = 66.4730 + (13.7516*(weight*0.453592)) + (5.033*((heightIntegerPart*12+heightDecimalPart)*0.0508)) - (6.7550*age);
@@ -160,9 +162,9 @@ class Profile {
                   throw new ProfileNotAProperValue('gender : $gender');
               }
               break;
-            case 'iso':
+            case MetricChoice.iso:
             switch(gender) {
-              case 'W':
+              case Gender.Female:
               switch(version) {
                   case RmrDates.a1918:
                     rRMRcal = 655.0955 + (9.5634*weight) + (1.8496*(heightIntegerPart*100+heightDecimalPart)) - (4.6756*age);
@@ -180,7 +182,7 @@ class Profile {
                     throw new ProfileNotAProperValue('version : $version');
                 }
                 break;
-              case 'M':
+              case Gender.Male:
               switch(version) {
                   case RmrDates.a1918:
                     rRMRcal = 66.4730 + (13.7516*weight) + (5.0033*(heightIntegerPart*100+heightDecimalPart)) - (6.7550*age);
@@ -282,15 +284,15 @@ class Profile {
       throw new ProfileNotEnoughArguments('$metricChoice $waist $hips $gender');
     } else {
       switch(metricChoice) {
-        case('imperial'):
+        case(MetricChoice.imperial):
           switch(gender) {
-            case('W'):
+            case(Gender.Female):
               fatPercentage = 495 / (
                 1.29579-0.35004*(log(waist+hips-wrist))
                 + 0.22100*(log((heightIntegerPart*12+heightDecimalPart)))
                 ) - 450;
             break;
-            case('M'):
+            case(Gender.Male):
               fatPercentage = 495 / (
                 1.0324-0.19077*(log(waist-wrist))
                 + 0.15456*(log((heightIntegerPart*12+heightDecimalPart)))
@@ -300,15 +302,15 @@ class Profile {
               throw new ProfileNotAProperValue('gender : $gender');
           }
           break;
-          case('iso'):
+          case(MetricChoice.iso):
             switch(gender) {
-              case('W'):
+              case(Gender.Female):
                 fatPercentage = 495 / (
                   1.29579-0.35004*(log(waist+hips-wrist))
                   + 0.22100*(log((heightIntegerPart*100+heightDecimalPart)))
                   ) - 450;
               break;
-              case('M'):
+              case(Gender.Male):
                 fatPercentage = 495 / (
                   1.0324-0.19077*(log(waist-wrist))
                   + 0.15456*(log((heightIntegerPart*100+heightDecimalPart)))

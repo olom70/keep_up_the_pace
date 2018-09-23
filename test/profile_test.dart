@@ -12,9 +12,9 @@ void main() {
   ..weight = 60.0
   ..heightIntegerPart = 1
   ..heightDecimalPart = 68
-  ..metricChoice = 'iso'
+  ..metricChoice = keepupthepace.MetricChoice.iso
   ..age = 35
-  ..gender = 'W';
+  ..gender = keepupthepace.Gender.Female;
 
   profile.computeRMR(keepupthepace.RmrDates.a1918);
   test('calculate RMR1918 (Calorie)', () {

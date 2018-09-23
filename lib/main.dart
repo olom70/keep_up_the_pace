@@ -13,11 +13,10 @@ void main() {
     ..weight = 67.0
     ..heightIntegerPart = 1
     ..heightDecimalPart = 72
-    ..metricChoice = 'iso'
+    ..metricChoice = keepupthepace.MetricChoice.iso
     ..age = 48
-    ..gender = 'M'
+    ..gender = keepupthepace.Gender.Male
     ..activityFactor = keepupthepace.ActivityFactor.lightlyActive;
-
 
 
   runApp(new MyApp(profile: profile));
