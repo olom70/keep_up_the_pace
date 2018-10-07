@@ -29,7 +29,7 @@ class Metrics extends StatelessWidget {
                   style: TextStyle(fontSize: 56.0,),
                 ),
                 Text(
-                  profile.displayBMI(),
+                  profile.displayNewBMI(),
                   style: TextStyle(fontSize: 56.0),
                 ),
                 RaisedButton(onPressed: ()

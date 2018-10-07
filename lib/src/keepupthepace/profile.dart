@@ -91,7 +91,7 @@ class Profile {
     }
   }
 
-  String displayBMI() {
+  String displayNewBMI() {
     try {
       computeBMI();
       return nBMI.round().toString();
@@ -101,6 +101,15 @@ class Profile {
     }
   }
 
+  String displayOldBMI() {
+    try {
+      computeBMI();
+      return bBMI.round().toString();
+    }
+    catch(e) {
+      return phrasebook.PhraseBook.notEnoughData();
+    }
+  }
 
 
   double computeRMRml(double rRMRcal, double weight) {

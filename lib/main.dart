@@ -16,7 +16,9 @@ void main() {
     ..metricChoice = keepupthepace.MetricChoice.iso
     ..age = 48
     ..gender = keepupthepace.Gender.Male
-    ..activityFactor = keepupthepace.ActivityFactor.lightlyActive;
+    ..activityFactor = keepupthepace.ActivityFactor.lightlyActive
+    ..profileName = 'Clode'
+    ..profileGoal = 'Test de clode';
 
 
   runApp(new MyApp(profile: profile));

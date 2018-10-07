@@ -14,7 +14,24 @@ class BmiTab extends StatelessWidget {
       children: <Widget>[
         Row(
           children: <Widget>[
-            Text('BMI tab')
+            Text(DemoLocalizations.of(context).profileHeader),
+            Text(DemoLocalizations.of(context).separator),
+            Text(profile.profileName)
+          ],
+        ),
+        Row(
+          children: <Widget>[Text(profile.profileGoal)],
+        ),
+        Row(children: <Widget>[
+          Text(DemoLocalizations.of(context).newBmiLabel),
+          Text(DemoLocalizations.of(context).separator),
+          Text(profile.displayNewBMI()),
+        ]),
+        Row(
+          children: <Widget>[
+            Text(DemoLocalizations.of(context).oldBmiLabel),
+            Text(DemoLocalizations.of(context).separator),
+            Text(profile.displayOldBMI()),
           ],
         )
       ],
@@ -31,9 +48,7 @@ class RmrTab extends StatelessWidget {
     return ListView(
       children: <Widget>[
         Row(
-          children: <Widget>[
-            Text('RMR tab')
-          ],
+          children: <Widget>[Text('RMR tab')],
         )
       ],
     );
@@ -49,18 +64,14 @@ class TeeTab extends StatelessWidget {
     return ListView(
       children: <Widget>[
         Row(
-          children: <Widget>[
-            Text('TEE tab')
-          ],
+          children: <Widget>[Text('TEE tab')],
         )
       ],
     );
   }
 }
 
-
-
-class Metrics_tabs extends StatelessWidget{
+class Metrics_tabs extends StatelessWidget {
   keepupthepace.Profile profile;
   Metrics_tabs({Key key, @required this.profile}) : super(key: key);
 
@@ -71,28 +82,26 @@ class Metrics_tabs extends StatelessWidget{
         child: Scaffold(
           appBar: AppBar(
             title: Text(DemoLocalizations.of(context).metrics_tabsLabel),
-            bottom: TabBar(
-                tabs: [
-                  Tab(text: DemoLocalizations.of(context).bmiLabel,),
-                  Tab(text: DemoLocalizations.of(context).rmrLabel,),
-                  Tab(text: DemoLocalizations.of(context).tteLabel,),
-                ]
-            ),
+            bottom: TabBar(tabs: [
+              Tab(
+                text: DemoLocalizations.of(context).bmiLabel,
+              ),
+              Tab(
+                text: DemoLocalizations.of(context).rmrLabel,
+              ),
+              Tab(
+                text: DemoLocalizations.of(context).tteLabel,
+              ),
+            ]),
           ),
-          body: TabBarView(
-              children: [
-                BmiTab(profile: profile),
-                RmrTab(profile: profile),
-                TeeTab(profile: profile),
-              ]
-          ),
-        )
-    );
+          body: TabBarView(children: [
+            BmiTab(profile: profile),
+            RmrTab(profile: profile),
+            TeeTab(profile: profile),
+          ]),
+        ));
   }
-
 }
-
-
 
 /*
 Scaffold(

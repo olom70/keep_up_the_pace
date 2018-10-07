@@ -115,6 +115,30 @@ class DemoLocalizations {
     );
   }
 
+  String get newBmiLabel {
+    return Intl.message(
+      'new BMI',
+      name: 'newBmiLabel',
+      desc: 'label for the new BMI formula',
+    );
+  }
+
+  String get oldBmiLabel {
+    return Intl.message(
+      'old BMI',
+      name: 'oldBmiLabel',
+      desc: 'label for the old BMI formula',
+    );
+  }
+
+  String get separator {
+    return Intl.message(
+      ':',
+      name: 'separator',
+      desc: 'separator between the label and the value',
+    );
+  }
+
   String get rmrLabel {
     return Intl.message(
       'RMR',
