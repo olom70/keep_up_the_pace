@@ -9,17 +9,15 @@ import 'package:keep_up_the_pace/keepupthepacelocalization.dart';
 void main() {
   debugPaintSizeEnabled=false; // debug layout
 
-  keepupthepace.Profile profile = new keepupthepace.Profile('test')
-    ..weight = 67.0
+  keepupthepace.Profile profile = new keepupthepace.Profile('Clode')
+    ..weightIntegerPart = 67
+    ..weightDecimalPart = 0
     ..heightIntegerPart = 1
     ..heightDecimalPart = 72
     ..metricChoice = keepupthepace.MetricChoice.iso
     ..age = 48
     ..gender = keepupthepace.Gender.Male
-    ..activityFactor = keepupthepace.ActivityFactor.lightlyActive
-    ..profileName = 'Clode'
-    ..profileGoal = 'Test de clode';
-
+    ..activityFactor = keepupthepace.ActivityFactor.lightlyActive;
 
   runApp(new MyApp(profile: profile));
 }

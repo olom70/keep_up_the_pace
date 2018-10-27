@@ -115,6 +115,31 @@ class DemoLocalizations {
     );
   }
 
+  String get settingsLabel {
+    return Intl.message(
+      'Settings',
+      name: 'settingsLabel',
+      desc: 'Settings is to enter the profile body specifications',
+    );
+  }
+
+  String get heightPromptLabel {
+    return Intl.message(
+      'Enter your height',
+      name: 'heightPromptLabel',
+      desc: 'Prompt to invite you to enter your height',
+    );
+  }
+
+  String get weightPromptLabel {
+    return Intl.message(
+      'Enter your weight',
+      name: 'weightPromptLabel',
+      desc: 'Prompt to invite you to enter your weight',
+    );
+  }
+
+
   String get newBmiLabel {
     return Intl.message(
       'new BMI',
@@ -133,7 +158,7 @@ class DemoLocalizations {
 
   String get separator {
     return Intl.message(
-      ':',
+      ' : ',
       name: 'separator',
       desc: 'separator between the label and the value',
     );
@@ -177,6 +202,38 @@ class DemoLocalizations {
       'Metrics',
       name: 'metrics_tabsLabel',
       desc: 'All the metrics in a tabbed view',
+    );
+  }
+
+  String get meter {
+    return Intl.message(
+      'Meter',
+      name: 'meter',
+      desc: 'the unit. 1 meter long for example',
+    );
+  }
+
+  String get centimeter {
+    return Intl.message(
+      'Centimeter',
+      name: 'centimeter',
+      desc: 'the unit. 1 centimeter long for example',
+    );
+  }
+
+  String get kilogram {
+    return Intl.message(
+      'Kilogram',
+      name: 'kilogram',
+      desc: 'the unit. 1 kilogram for example',
+    );
+  }
+
+  String get gram {
+    return Intl.message(
+      'Gram',
+      name: 'gram',
+      desc: 'the unit. 1 gram for example',
     );
   }
 

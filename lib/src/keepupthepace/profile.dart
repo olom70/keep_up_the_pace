@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'phrasebook.dart' as phrasebook;
+import 'package:keep_up_the_pace/keepupthepacelocalization.dart';
 //
 // Exception handling
 //
@@ -13,7 +14,6 @@ class ProfileNotEnoughArguments implements Exception {
   String rootCause;
   ProfileNotEnoughArguments (this.rootCause);
   String errMsg() => phrasebook.PhraseBook.notEnoughArguments(this.rootCause);
-
 }
 
 class ProfileNotAProperValue implements Exception {
@@ -34,6 +34,8 @@ class Profile {
   MetricChoice metricChoice;
   String defaultProfile;
   double weight;
+  int weightIntegerPart;
+  int weightDecimalPart;
   int heightIntegerPart;
   int heightDecimalPart;
   int age;
@@ -58,8 +60,38 @@ class Profile {
 
 // constructor
   Profile (String profilename) {
-    this.profileName = profilename;
+    this.profileName = profilename ?? ' ';
+    profileGoal = profilename ?? ' ';
     fileName = profileName.trim().toLowerCase().replaceAll(new RegExp(r'[];\\/:*?\<>|&'), ' ');
+  }
+
+  String displayHeightIntegerPart() {
+    return heightIntegerPart.toString() ?? '0';
+  }
+
+  String displayHeightDecimalPart() {
+    return heightDecimalPart.toString() ?? '0';
+  }
+
+  String displayWeight() {
+    return weight.toString() ?? '0';
+  }
+
+  String displayWeightIntegerPart() {
+    return weightIntegerPart.toString() ?? '0';
+  }
+
+  String displayWeightDecimalPart() {
+    return weightDecimalPart.toString() ?? '0';
+  }
+
+
+  String displayAge() {
+    return age.toString() ?? '0';
+  }
+
+  computeWeight() {
+    (weightIntegerPart == null || weightDecimalPart == null) ? weight = null : weight = weightIntegerPart + (weightDecimalPart/100);
   }
 
   computeBMI() {
@@ -73,6 +105,7 @@ class Profile {
     // ISO: BMI = 1.3 x weight (kg) / height (m)2.5
     // or
     // imperial : BMI = 5734*weight(lb)/height(in)2.5
+    computeWeight();
     if ((weight == null) || (heightIntegerPart == null) || (heightDecimalPart == null) || (metricChoice == null)) {
       throw new ProfileNotEnoughArguments('$weight $heightIntegerPart $heightDecimalPart ' + metricChoice.toString());
   } else {
@@ -111,7 +144,6 @@ class Profile {
     }
   }
 
-
   double computeRMRml(double rRMRcal, double weight) {
     // To convert kilocalories per day obtained from the Harris Benedict equation2 to ml.kg-1.min-1, the following formula is used.
     //     kcal.day-1/1440 = kcal.min-1; kcal.min-1/5 = L.min-1; L.min-1/(weight kg)x1000 = ml.kg-1.min-1
@@ -125,6 +157,7 @@ class Profile {
     // https://sites.google.com/site/compendiumofphysicalactivities/corrected-mets
     // https://en.wikipedia.org/wiki/Harris–Benedict_equation
     // https://en.wikipedia.org/wiki/Metabolic_equivalent
+        computeWeight();
         if ((weight == null) || (heightIntegerPart == null) || (heightDecimalPart == null) || (metricChoice == null) || (age == null) || (gender == null)) {
           throw new ProfileNotEnoughArguments('$weight $heightIntegerPart $heightDecimalPart $metricChoice $age $gender');
         } else {
@@ -341,6 +374,35 @@ class Profile {
       } else {
         ratio = waist / hips;
       }
+    }
+
+    computeAll() {
+      // infering the metrics of the current profile
+      try {
+        computeBMI();
+      }
+      catch(e) {
+      }
+
+      try {
+        computeHBE();
+      }
+      catch(e) {
+      }
+
+      try {
+        computeFat();
+      }
+      catch(e) {
+      }
+
+      try {
+        computeRatio();
+      }
+      catch(e) {
+      }
+
+
     }
 
   saveFile() {
