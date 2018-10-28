@@ -131,6 +131,23 @@ class DemoLocalizations {
     );
   }
 
+  String get agePromptLabel {
+    return Intl.message(
+      'Enter your age',
+      name: 'agePromptLabel',
+      desc: 'Prompt to invite you to enter your age.',
+    );
+  }
+
+  String get sexPromptLabel {
+    return Intl.message(
+      'Enter your gender',
+      name: 'sexPromptLabel',
+      desc: 'Prompt to invite you to specify if you are a woman or a man.',
+    );
+  }
+
+
   String get weightPromptLabel {
     return Intl.message(
       'Enter your weight',
@@ -139,6 +156,13 @@ class DemoLocalizations {
     );
   }
 
+  String get notDefinedLabel {
+    return Intl.message(
+      'Not defined',
+      name: 'notDefinedLabel',
+      desc: 'when something to be returned is not defined',
+    );
+  }
 
   String get newBmiLabel {
     return Intl.message(
@@ -234,6 +258,14 @@ class DemoLocalizations {
       'Gram',
       name: 'gram',
       desc: 'the unit. 1 gram for example',
+    );
+  }
+
+  String get ageLabel {
+    return Intl.message(
+      'years old',
+      name: 'ageLabel',
+      desc: 'ex : 45 years old ',
     );
   }
 

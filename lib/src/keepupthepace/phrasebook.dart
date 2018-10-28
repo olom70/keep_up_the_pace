@@ -20,5 +20,28 @@ class PhraseBook {
       name: "notEnoughData",
       args: [],
       desc: "not enough data to display the requested information",
-      examples: const {'rootCause' : 'age'});
+      examples: const {'not enough data' : ' '});
+
+  static maleLabel() => Intl.message(
+      "Male",
+      name: "maleLabel",
+      args: [],
+      desc: "man",
+      examples: const {'Male' : 'Man'});
+
+  static femaleLabel() => Intl.message(
+      "Female",
+      name: "FemaleLabel",
+      args: [],
+      desc: "female",
+      examples: const {'Female' : 'Woman'});
+
+  static notDefinedLabel() => Intl.message(
+      "Not defined",
+      name: "notDefinedLabel",
+      args: [],
+      desc: "when something to be returned is not defined",
+      examples: const {'value' : 'not defined'});
+
+
 }

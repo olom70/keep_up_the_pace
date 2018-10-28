@@ -85,9 +85,34 @@ class Profile {
     return weightDecimalPart.toString() ?? '0';
   }
 
-
   String displayAge() {
     return age.toString() ?? '0';
+  }
+
+  String displayGenderWord() {
+    switch(gender) {
+      case Gender.Female:
+        return phrasebook.PhraseBook.femaleLabel();
+        break;
+      case Gender.Male:
+        return phrasebook.PhraseBook.maleLabel();
+        break;
+      default:
+        return phrasebook.PhraseBook.notDefinedLabel();
+    }
+  }
+
+  String displayGenderSign() {
+    switch(gender) {
+      case Gender.Female:
+        return '♀';
+        break;
+      case Gender.Male:
+        return '♂';
+        break;
+      default:
+        return '♀';
+    }
   }
 
   computeWeight() {

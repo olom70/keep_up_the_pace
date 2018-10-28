@@ -3,6 +3,7 @@ import 'package:keep_up_the_pace/KeepUpThePace.dart' as keepupthepace;
 import 'package:keep_up_the_pace/keepupthepacelocalization.dart';
 import 'package:keep_up_the_pace/metrics_tab_height.dart';
 import 'package:keep_up_the_pace/metrics_tab_weight.dart';
+import 'package:keep_up_the_pace/metrics_tab_age_sex.dart';
 
 class SettingsTab extends StatelessWidget {
   keepupthepace.Profile profile;
@@ -35,9 +36,17 @@ class SettingsTab extends StatelessWidget {
         Row(
           children: <Widget>[
             WeightIntegerPartButton(profile: profile),
-            Text(DemoLocalizations.of(context).meter),
+            Text(DemoLocalizations.of(context).kilogram),
             WeightDecimalPartButton(profile: profile),
-            Text(DemoLocalizations.of(context).centimeter)
+            Text(DemoLocalizations.of(context).gram)
+          ],
+        ),
+        Divider(),
+        Row(
+          children: <Widget>[
+            AgeButton(profile: profile),
+            Text(DemoLocalizations.of(context).ageLabel),
+            SexButton(profile: profile),
           ],
         )
       ],
