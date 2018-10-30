@@ -124,6 +124,22 @@ class TeeTab extends StatelessWidget {
   }
 }
 
+class FatTab extends StatelessWidget {
+  keepupthepace.Profile profile;
+  FatTab({Key key, @required this.profile}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: <Widget>[
+        Row(
+          children: <Widget>[Text('Fat tab')],
+        )
+      ],
+    );
+  }
+}
+
 class Metrics_tabs extends StatelessWidget {
   keepupthepace.Profile profile;
   Metrics_tabs({Key key, @required this.profile}) : super(key: key);
@@ -148,6 +164,9 @@ class Metrics_tabs extends StatelessWidget {
               Tab(
                 text: DemoLocalizations.of(context).tteLabel,
               ),
+              Tab(
+                text: DemoLocalizations.of(context).fatLabel,
+              )
             ]),
           ),
           body: TabBarView(children: [
@@ -155,16 +174,8 @@ class Metrics_tabs extends StatelessWidget {
             BmiTab(profile: profile),
             RmrTab(profile: profile),
             TeeTab(profile: profile),
+            FatTab(profile: profile)
           ]),
         ));
   }
 }
-
-/*
-Scaffold(
-      appBar: AppBar(
-        title: Text(DemoLocalizations.of(context).metrics_tabsLabel),
-      ),
-      body: Text('metrics_tabs'),
-    );
- */

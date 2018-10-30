@@ -39,10 +39,11 @@ class Profile {
   int heightIntegerPart;
   int heightDecimalPart;
   int age;
-  double wrist;
-  double forearm;
-  double waist;
-  double hips;
+  int chest;
+  int abdomen;
+  int thigh;
+  int triceps;
+  int suprailium;
   Gender gender;
   ActivityFactor activityFactor;
   // infered
@@ -52,11 +53,10 @@ class Profile {
   double rRMRcal;
   double rRMRml;
   double hHBE;
-  double fatPercentage;
-  double bodyFatWeight;
-  double leanBodyMass;
-  double ratio;
-
+  double quadraticBodyDensity;
+  double exponentialBodyDensity;
+  double quadraticFatPercentage;
+  double exponentialFatPercentage;
 
 // constructor
   Profile (String profilename) {
@@ -341,65 +341,69 @@ class Profile {
   }
 
   computeFat() {
-  //http://www.calculator.net/body-fat-calculator.html
-  //body fat calculator formula for man:
-  //495/(1.0324-0.19077(LOG(waist-neck))+0.15456(LOG(height)))-450
-  //
-  //body fat calculator formula for woman:
-  //495/(1.29579-0.35004(LOG(waist+hip-neck))+0.22100(LOG(height)))-450
-    if ((metricChoice == null) || (waist == null) || (hips == null) || (gender == null)) {
-      throw new ProfileNotEnoughArguments('$metricChoice $waist $hips $gender');
-    } else {
-      switch(metricChoice) {
-        case(MetricChoice.imperial):
-          switch(gender) {
-            case(Gender.Female):
-              fatPercentage = 495 / (
-                1.29579-0.35004*(log(waist+hips-wrist))
-                + 0.22100*(log((heightIntegerPart*12+heightDecimalPart)))
-                ) - 450;
-            break;
-            case(Gender.Male):
-              fatPercentage = 495 / (
-                1.0324-0.19077*(log(waist-wrist))
-                + 0.15456*(log((heightIntegerPart*12+heightDecimalPart)))
-              ) - 450;
-            break;
-            default:
-              throw new ProfileNotAProperValue('gender : $gender');
-          }
-          break;
-          case(MetricChoice.iso):
-            switch(gender) {
-              case(Gender.Female):
-                fatPercentage = 495 / (
-                  1.29579-0.35004*(log(waist+hips-wrist))
-                  + 0.22100*(log((heightIntegerPart*100+heightDecimalPart)))
-                  ) - 450;
-              break;
-              case(Gender.Male):
-                fatPercentage = 495 / (
-                  1.0324-0.19077*(log(waist-wrist))
-                  + 0.15456*(log((heightIntegerPart*100+heightDecimalPart)))
-                ) - 450;
-              break;
-              default:
-                throw new ProfileNotAProperValue('gender : $gender');
-            }
-            break;
-          default:
-            throw new ProfileNotAProperValue('metricChoice : $metricChoice');
-        }
-      }
+    /*
+quadratic formula :	BD = a − b ⋅ S + c ⋅ S² − d ⋅ age
+
+    man
+    BD :	Body density
+    a :	1.10938
+    b :	0.0008267
+    S :	"sum of skinfolds in mm for chest, abdomen and thigh"
+    c :	0.0000016
+    d :	0.0002574
+    age :	year
+
+    woman
+    BD :	Body density
+    a :	1.0994921
+    b :	0.0009929
+    S :	"sum of skinfolds in mm
+    for triceps, thigh, and suprailium"
+    c :	0.0000023
+    d :	0.0001392
+    age :	year
+
+exponential formula :	BD = exp(a − b ⋅ Sk − c ⋅ age)
+  man
+  BD :	body density
+  a :	0.109648
+  b :	0.0021745
+  k :	0.747
+  c :	0.0002516
+  S :	"sum of skinfolds in mm for chest, abdomen and thigh"
+
+  woman
+  BD :	body density
+  a :	0.120936
+  b :	0.0084087
+  k :	0.532
+  c :	0.0001178
+  S :	"sum of skinfolds in mm for triceps, thigh, and suprailium"
+
+  To find out the approximate body fat percentage, the body density score must be plugged into another formula. The Siri equation, which was designed to estimate body fat percent from body density, is:
+[(4.95/body density) - 4.5] x 100 = percent body fat
+
+*/
+   switch(gender) {
+     case(Gender.Male):
+       (triceps == null) || (abdomen == null) || (thigh = null) || (age == null)
+           ? throw new ProfileNotEnoughArguments('$triceps $abdomen $thigh')
+           : quadraticBodyDensity =  (1.10938 - 0.0008267 * (triceps+abdomen+thigh) + 0.0000016 * pow((triceps+abdomen+thigh),2)-0.0002574*age);
+             exponentialBodyDensity = exp(0.109648-0.0021745*pow((triceps+abdomen+thigh),0.747)-0.0002516*age);
+     break;
+     case(Gender.Female):
+       (triceps == null) || (suprailium == null) || (thigh = null) || (age == null)
+           ? throw new ProfileNotEnoughArguments('$triceps $suprailium $thigh')
+           : quadraticBodyDensity =  (1.0994921 - 0.0009929 * (triceps+suprailium+thigh) + 0.0000023 * pow((triceps+suprailium+thigh),2)-0.0001392*age);
+             exponentialBodyDensity = exp(0.120936-0.0084087*pow((triceps+suprailium+thigh),0.532)-0.0001178*age);
+     break;
+     default:
+       throw new ProfileNotAProperValue('gender : $gender');
     }
 
-    computeRatio() {
-      if ((waist == null) || (hips == null)) {
-        throw new ProfileNotEnoughArguments('$waist $hips');
-      } else {
-        ratio = waist / hips;
-      }
-    }
+    quadraticBodyDensity == null ? null : quadraticFatPercentage = ((4.95/quadraticBodyDensity)-4.5)*100; exponentialFatPercentage = ((4.95/exponentialBodyDensity)-4.5)*100;
+
+  }
 
     computeAll() {
       // infering the metrics of the current profile
@@ -420,14 +424,6 @@ class Profile {
       }
       catch(e) {
       }
-
-      try {
-        computeRatio();
-      }
-      catch(e) {
-      }
-
-
     }
 
   saveFile() {
@@ -443,8 +439,6 @@ class Profile {
     print('new BMI : $nBMI');
     print('BMR : $bBMR');
     print('HBE : $hHBE');
-    print('fatPercentage : $fatPercentage');
-    print('ratio : $ratio');
   }
 
 }

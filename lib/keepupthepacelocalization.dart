@@ -204,6 +204,15 @@ class DemoLocalizations {
     );
   }
 
+  String get fatLabel {
+    return Intl.message(
+      'Fat Percentage',
+      name: 'fatLabel',
+      desc: 'Fat Percentage : % of fat of the body',
+    );
+  }
+
+
   String get metricsLabel {
     return Intl.message(
       'Metrics : Dasboard',
