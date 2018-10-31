@@ -78,20 +78,11 @@ class _SexButtonState extends State<SexButton> {
             onChanged: (String newValue) {
               setState(() {
                 dropdown1Value = newValue;
-                switch(dropdown1Value) {
-                  case '♂':
-                    profile.gender = keepupthepace.Gender.Male;
-                    break;
-                  case '♀':
-                    profile.gender = keepupthepace.Gender.Female;
-                    break;
-                  default:
-                    profile.gender = keepupthepace.Gender.Female;
-                }
+                profile.setGenderBySign(dropdown1Value);
                 profile.computeAll();
               });
             },
-            items: <String>['♂', '♀']
+            items: <String>[profile.femaleSign, profile.maleSign]
                 .map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,

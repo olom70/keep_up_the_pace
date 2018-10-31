@@ -1,14 +1,15 @@
 import 'dart:io';
 import 'dart:math';
 import 'phrasebook.dart' as phrasebook;
-import 'package:keep_up_the_pace/keepupthepacelocalization.dart';
-//
-// Exception handling
-//
-enum ActivityFactor {sedentary, lightlyActive, moderatelyActive, veryActive, extraActive}
+
+enum ActivityFactor {sedentary, lightlyActive, active, moderatelyActive, vigorous, vigorouslyActive}
 enum RmrDates {a1918, a1984, a1990}
 enum MetricChoice {iso, imperial}
 enum Gender {Female, Male}
+
+//
+// Exception handling
+//
 
 class ProfileNotEnoughArguments implements Exception {
   String rootCause;
@@ -24,11 +25,15 @@ String errMsg() => phrasebook.PhraseBook.notAProperValue(this.property);
 
 }
 
-// class to manage ap profile
+//
+// class to manage profiles
+//
 class Profile {
 
+  final  maleSign = '♂';
+  final femaleSign = '♀';
   //facts
-  String profileName;
+    String profileName;
   String fileName;
   String profileGoal;
   MetricChoice metricChoice;
@@ -105,15 +110,78 @@ class Profile {
   String displayGenderSign() {
     switch(gender) {
       case Gender.Female:
-        return '♀';
+        return femaleSign;
         break;
       case Gender.Male:
-        return '♂';
+        return maleSign;
         break;
       default:
-        return '♀';
+        return femaleSign;
     }
   }
+
+  setGenderBySign(String genderSign) {
+    if (genderSign == maleSign) {gender = Gender.Male;};
+    if (genderSign == femaleSign) {gender = Gender.Female;};
+  }
+
+  String displayActivityFactor() {
+    switch(activityFactor) {
+      case ActivityFactor.sedentary :
+        return phrasebook.PhraseBook.sedentaryLabel();
+        break;
+      case ActivityFactor.lightlyActive :
+        return phrasebook.PhraseBook.lightlyActiveLabel();
+        break;
+      case ActivityFactor.moderatelyActive :
+        return phrasebook.PhraseBook.moderatelyActiveLabel();
+        break;
+      case ActivityFactor.active :
+        return phrasebook.PhraseBook.activeLabel();
+      case ActivityFactor.vigorous :
+        return phrasebook.PhraseBook.vigorousLabel();
+        break;
+      case ActivityFactor.vigorouslyActive :
+        return phrasebook.PhraseBook.vigorouslyActiveLabel();
+        break;
+      default :
+        return phrasebook.PhraseBook.sedentaryLabel();
+    }
+  }
+
+  String displayAnActivityFactorLabel(ActivityFactor af) {
+    switch(af) {
+      case ActivityFactor.sedentary :
+        return phrasebook.PhraseBook.sedentaryLabel();
+        break;
+      case ActivityFactor.lightlyActive :
+        return phrasebook.PhraseBook.lightlyActiveLabel();
+        break;
+      case ActivityFactor.moderatelyActive :
+        return phrasebook.PhraseBook.moderatelyActiveLabel();
+        break;
+      case ActivityFactor.active :
+        return phrasebook.PhraseBook.activeLabel();
+      case ActivityFactor.vigorous :
+        return phrasebook.PhraseBook.vigorousLabel();
+        break;
+      case ActivityFactor.vigorouslyActive :
+        return phrasebook.PhraseBook.vigorouslyActiveLabel();
+        break;
+      default :
+        return phrasebook.PhraseBook.sedentaryLabel();
+    }
+  }
+
+
+  setActivityFactorByDisplay(String activityFactorDisplay) {
+      if (phrasebook.PhraseBook.sedentaryLabel() == activityFactorDisplay) { activityFactor = ActivityFactor.sedentary;};
+      if (phrasebook.PhraseBook.lightlyActiveLabel() == activityFactorDisplay) { activityFactor = ActivityFactor.lightlyActive;};
+      if (phrasebook.PhraseBook.moderatelyActiveLabel() == activityFactorDisplay) { activityFactor = ActivityFactor.moderatelyActive;};
+      if (phrasebook.PhraseBook.activeLabel() == activityFactorDisplay) { activityFactor = ActivityFactor.active;};
+      if (phrasebook.PhraseBook.vigorousLabel() == activityFactorDisplay) { activityFactor = ActivityFactor.vigorous;};
+      if (phrasebook.PhraseBook.vigorouslyActiveLabel() == activityFactorDisplay) { activityFactor = ActivityFactor.vigorouslyActive;};
+    }
 
   computeWeight() {
     (weightIntegerPart == null || weightDecimalPart == null) ? weight = null : weight = weightIntegerPart + (weightDecimalPart/100);
@@ -310,19 +378,22 @@ class Profile {
     } else {
       switch(activityFactor) {
         case ActivityFactor.sedentary:
-          hHBE = rRMRcal * 1.2;
+          hHBE = rRMRcal * 1.4;
           break;
         case ActivityFactor.lightlyActive:
-          hHBE = rRMRcal * 1.375;
+          hHBE = rRMRcal * 1.69;
           break;
         case ActivityFactor.moderatelyActive:
-          hHBE = rRMRcal * 1.55;
+          hHBE = rRMRcal * 1.70;
           break;
-        case ActivityFactor.veryActive:
-          hHBE = rRMRcal * 1.725;
+        case ActivityFactor.active:
+          hHBE = rRMRcal * 1.99;
           break;
-        case ActivityFactor.extraActive:
-          hHBE = rRMRcal * 1.9;
+        case ActivityFactor.vigorous:
+          hHBE = rRMRcal * 2.0;
+          break;
+        case ActivityFactor.vigorouslyActive:
+          hHBE = rRMRcal * 2.4;
           break;
         default:
           throw new ProfileNotAProperValue('activityFactor : ' + activityFactor.toString());

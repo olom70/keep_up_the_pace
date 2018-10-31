@@ -274,7 +274,7 @@ class DemoLocalizations {
     return Intl.message(
       'years old',
       name: 'ageLabel',
-      desc: 'ex : 45 years old ',
+      desc: 'ex : 45 years old',
     );
   }
 

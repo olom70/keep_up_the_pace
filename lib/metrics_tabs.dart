@@ -4,6 +4,7 @@ import 'package:keep_up_the_pace/keepupthepacelocalization.dart';
 import 'package:keep_up_the_pace/metrics_tab_height.dart';
 import 'package:keep_up_the_pace/metrics_tab_weight.dart';
 import 'package:keep_up_the_pace/metrics_tab_age_sex.dart';
+import 'package:keep_up_the_pace/metrics_tab_activity_level.dart';
 
 class SettingsTab extends StatelessWidget {
   keepupthepace.Profile profile;
@@ -48,7 +49,13 @@ class SettingsTab extends StatelessWidget {
             Text(DemoLocalizations.of(context).ageLabel),
             SexButton(profile: profile),
           ],
-        )
+        ),
+        Divider(),
+//        Row(
+//          children: <Widget>[
+            ActivityFactorChoice(profile: profile)
+//          ],
+//        )
       ],
     );
   }
