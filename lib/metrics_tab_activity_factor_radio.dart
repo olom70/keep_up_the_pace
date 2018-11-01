@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:keep_up_the_pace/KeepUpThePace.dart' as keepupthepace;
 import 'package:keep_up_the_pace/keepupthepacelocalization.dart';
 
+// Version Bouton Radio
+
 class ActivityFactorChoice extends StatefulWidget {
   keepupthepace.Profile profile;
   ActivityFactorChoice({Key key, @required this.profile}) : super(key: key);

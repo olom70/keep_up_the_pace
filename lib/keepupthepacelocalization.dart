@@ -156,6 +156,14 @@ class DemoLocalizations {
     );
   }
 
+  String get activityFactorPromptLabel {
+    return Intl.message(
+      'Enter your level of activty',
+      name: 'activityFactorPromptLabel',
+      desc: 'Prompt to invite you to enter if you are sedentary or very active',
+    );
+  }
+
   String get notDefinedLabel {
     return Intl.message(
       'Not defined',
