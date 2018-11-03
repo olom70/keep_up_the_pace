@@ -65,33 +65,33 @@ class Profile {
 
 // constructor
   Profile (String profilename) {
-    this.profileName = profilename ?? ' ';
-    profileGoal = profilename ?? ' ';
+    this.profileName = (profilename != null) ? profilename : ' ';
+    profileGoal = (profilename != null) ? profilename : ' ';
     fileName = profileName.trim().toLowerCase().replaceAll(new RegExp(r'[];\\/:*?\<>|&'), ' ');
   }
 
   String displayHeightIntegerPart() {
-    return heightIntegerPart.toString() ?? '0';
+    return (heightIntegerPart != null) ? heightIntegerPart.toString() : '0';
   }
 
   String displayHeightDecimalPart() {
-    return heightDecimalPart.toString() ?? '0';
+    return (heightDecimalPart != null) ? heightDecimalPart.toString() : '0';
   }
 
   String displayWeight() {
-    return weight.toString() ?? '0';
+    return (weight != null) ? weight.toString() : '0';
   }
 
   String displayWeightIntegerPart() {
-    return weightIntegerPart.toString() ?? '0';
+    return (weightIntegerPart != null) ? weightIntegerPart.toString() : '0';
   }
 
   String displayWeightDecimalPart() {
-    return weightDecimalPart.toString() ?? '0';
+    return (weightDecimalPart != null) ? weightDecimalPart.toString() : '0';
   }
 
   String displayAge() {
-    return age.toString() ?? '0';
+    return (age != null) ? age.toString() : '0';
   }
 
   String displayGenderWord() {
@@ -173,7 +173,6 @@ class Profile {
     }
   }
 
-
   setActivityFactorByDisplay(String activityFactorDisplay) {
       if (phrasebook.PhraseBook.sedentaryLabel() == activityFactorDisplay) { activityFactor = ActivityFactor.sedentary;};
       if (phrasebook.PhraseBook.lightlyActiveLabel() == activityFactorDisplay) { activityFactor = ActivityFactor.lightlyActive;};
@@ -182,6 +181,28 @@ class Profile {
       if (phrasebook.PhraseBook.vigorousLabel() == activityFactorDisplay) { activityFactor = ActivityFactor.vigorous;};
       if (phrasebook.PhraseBook.vigorouslyActiveLabel() == activityFactorDisplay) { activityFactor = ActivityFactor.vigorouslyActive;};
     }
+
+  String displayChest() {
+    return (chest != null) ? chest.toString() : '0';
+  }
+
+  String displayTriceps() {
+    return (triceps != null) ? triceps.toString() : '0';
+  }
+
+  String displayAbdomen() {
+    return (abdomen != null) ? abdomen.toString() : '0';
+  }
+
+  String displaySuprailium() {
+    return (suprailium != null) ? suprailium.toString() : '0';
+  }
+
+  String displayThigh() {
+    return (thigh != null) ? thigh.toString() : '0';
+  }
+
+
 
   computeWeight() {
     (weightIntegerPart == null || weightDecimalPart == null) ? weight = null : weight = weightIntegerPart + (weightDecimalPart/100);

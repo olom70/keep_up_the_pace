@@ -5,6 +5,7 @@ import 'package:keep_up_the_pace/metrics_tab_height.dart';
 import 'package:keep_up_the_pace/metrics_tab_weight.dart';
 import 'package:keep_up_the_pace/metrics_tab_age_sex.dart';
 import 'package:keep_up_the_pace/metrics_tab_activity_factor_droplist.dart';
+import 'package:keep_up_the_pace/metrics_tab_fold.dart';
 
 class SettingsTab extends StatelessWidget {
   keepupthepace.Profile profile;
@@ -55,6 +56,44 @@ class SettingsTab extends StatelessWidget {
           children: <Widget>[
             ActivityFactorButton(profile: profile)
           ],
+        ),
+        Divider(),
+        Table(
+          children: <TableRow> [
+            TableRow(
+              children: <Widget> [
+                Text(DemoLocalizations.of(context).threeSkinflodsMethodsLabel),
+                Text(DemoLocalizations.of(context).femaleLabel),
+                Text(DemoLocalizations.of(context).maleLabel),
+                Text(DemoLocalizations.of(context).sizeInMilimeterLabel)
+              ],
+            ),
+            TableRow(
+              children: <Widget>[
+                Text(DemoLocalizations.of(context).locationLabel+DemoLocalizations.of(context).separator),
+                Text(DemoLocalizations.of(context).tricepsLabel),
+                Text(DemoLocalizations.of(context).chestLabel),
+                FoldButton(profile: profile, foldNumber: 1)
+              ]
+            ),
+            TableRow(
+              children: <Widget> [
+                Text(DemoLocalizations.of(context).locationLabel+DemoLocalizations.of(context).separator),
+                Text(DemoLocalizations.of(context).suprailiumLabel),
+                Text(DemoLocalizations.of(context).abdomenLabel),
+                FoldButton(profile: profile, foldNumber: 2)
+              ]
+            ),
+            TableRow(
+                children: <Widget> [
+                  Text(DemoLocalizations.of(context).locationLabel+DemoLocalizations.of(context).separator),
+                  Text(DemoLocalizations.of(context).thighLabel),
+                  Text(DemoLocalizations.of(context).thighLabel),
+                  FoldButton(profile: profile, foldNumber: 3)
+                ]
+            )
+          ]
+
         )
       ],
     );

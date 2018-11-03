@@ -286,6 +286,85 @@ class DemoLocalizations {
     );
   }
 
+  String get maleLabel {
+    return Intl.message(
+      'Male',
+      name: 'maleLabel',
+      desc: 'I am a male',
+    );
+  }
+
+  String get femaleLabel {
+    return Intl.message(
+      'Female',
+      name: 'femaleLabel',
+      desc: 'I am a male',
+    );
+  }
+
+  String get threeSkinflodsMethodsLabel {
+    return Intl.message(
+      '3 skinfolds methods',
+      name: 'threeSkinflodsMethodsLabel',
+      desc: 'the name of the method to determine the fat % : 3 skin folds methods',
+    );
+  }
+
+  String get sizeInMilimeterLabel {
+    return Intl.message(
+      'size in millimeter',
+      name: 'sizeInMilimeterLabel',
+      desc: 'size in millimeter of the skin fold',
+    );
+  }
+
+  String get locationLabel {
+    return Intl.message(
+      'Location',
+      name: 'locationLabel',
+      desc: 'location of the measurement',
+    );
+  }
+
+  String get chestLabel {
+    return Intl.message(
+      'Chest',
+      name: 'chestLabel',
+      desc: 'The chest',
+    );
+  }
+
+  String get tricepsLabel {
+    return Intl.message(
+      'Triceps',
+      name: 'tricepsLabel',
+      desc: 'The triceps',
+    );
+  }
+
+  String get abdomenLabel {
+    return Intl.message(
+      'Abdomen',
+      name: 'abdomenLabel',
+      desc: 'The abdomen',
+    );
+  }
+
+  String get suprailiumLabel {
+    return Intl.message(
+      'Suprailium',
+      name: 'suprailiumLabel',
+      desc: 'The suprailium',
+    );
+  }
+
+  String get thighLabel {
+    return Intl.message(
+      'Thigh',
+      name: 'thighLabel',
+      desc: 'The thigh',
+    );
+  }
 
 }
 

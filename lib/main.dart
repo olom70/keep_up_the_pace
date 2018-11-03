@@ -17,6 +17,9 @@ void main() {
     ..metricChoice = keepupthepace.MetricChoice.iso
     ..age = 48
     ..gender = keepupthepace.Gender.Male
+//    ..chest = 5
+//    ..abdomen = 5
+//    ..thigh = 5
     ..activityFactor = keepupthepace.ActivityFactor.lightlyActive;
 
   runApp(new MyApp(profile: profile));
